@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "lib": ["es2015", "es2016", "es2017", "esnext"],
+    "module": "CommonJS",
+    "declaration": true,
+    "outDir": "./lib",
+    "strict": true,
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/__tests__/*"]
+}
