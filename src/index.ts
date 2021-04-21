@@ -53,13 +53,31 @@ interface GradientThemeElement
 
 export type ThemeElement = RectangleThemeElement | GradientThemeElement;
 
-export type GetElementsFn = (
-  replyClipId: string,
-  answerClipId: string,
-  askEpisodeTitle: string,
-  replyClipDuration: number,
-  replyClipDisplayName: string,
-  answerClipDuration: number,
-  answerClipDisplayName: string,
-  hostPromoText: string | null
-) => Array<ThemeElement>;
+type AnswerData = {
+  answer: {
+    id: string;
+    ask: {
+      id: string;
+      title: string;
+      host: {
+        id: string;
+        promoText: string | null;
+      } | null;
+    };
+    clip: {
+      id: string;
+      duration: number;
+      displayName: string;
+    };
+    reply: {
+      id: string;
+      clip: {
+        id: string;
+        duration: number;
+        displayName: string;
+      };
+    };
+  };
+};
+
+export type GetElementsFn = (answer: AnswerData) => Array<ThemeElement>;
