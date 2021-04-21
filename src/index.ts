@@ -54,28 +54,26 @@ interface GradientThemeElement
 export type ThemeElement = RectangleThemeElement | GradientThemeElement;
 
 type AnswerData = {
-  answer: {
+  id: string;
+  ask: {
     id: string;
-    ask: {
+    title: string;
+    host: {
       id: string;
-      title: string;
-      host: {
-        id: string;
-        promoText: string | null;
-      } | null;
-    };
+      promoText: string | null;
+    } | null;
+  };
+  clip: {
+    id: string;
+    duration: number;
+    displayName: string;
+  };
+  reply: {
+    id: string;
     clip: {
       id: string;
       duration: number;
       displayName: string;
-    };
-    reply: {
-      id: string;
-      clip: {
-        id: string;
-        duration: number;
-        displayName: string;
-      };
     };
   };
 };
