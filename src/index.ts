@@ -61,9 +61,14 @@ type VideoProps = {
   height?: number;
 };
 
+export enum VideoSource {
+  Clip = "clip",
+  Theme = "theme",
+}
+
 interface VideoThemeElement extends IThemeElement<"video", VideoProps> {
   videoKey: string;
-  source: "clip" | "theme";
+  source: VideoSource;
 }
 
 interface TextThemeElement extends IThemeElement<"text", TextProps> {}
@@ -77,6 +82,16 @@ type ImageProps = {
   imageKey: string;
 };
 
+export enum TextAlign {
+  Left = "left",
+  Center = "center",
+  Right = "right",
+}
+export enum OriginY {
+  Top = "top",
+  Bottom = "bottom",
+}
+
 interface ImageThemeElement extends IThemeElement<"image", ImageProps> {}
 
 type TextProps = {
@@ -84,8 +99,8 @@ type TextProps = {
   fontSize: number;
   lineHeight?: number;
   fontName: string;
-  textAlign: "center" | "left" | "right";
-  originY?: "top" | "bottom";
+  textAlign: TextAlign;
+  originY?: OriginY;
   color: string;
   alpha?: number;
   x?: number;
