@@ -89,6 +89,7 @@ export enum TextAlign {
 }
 export enum OriginY {
   Top = "top",
+  Center = "center",
   Bottom = "bottom",
 }
 
