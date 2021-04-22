@@ -66,14 +66,6 @@ interface VideoThemeElement extends IThemeElement<VideoProps> {
   source: "clip" | "theme";
 }
 
-type FrameProps = {
-  alpha?: number;
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-};
-
 interface TextThemeElement extends IThemeElement<TextProps> {
   type: "text";
 }
@@ -103,6 +95,16 @@ type TextProps = {
   y?: number;
   width?: number;
   height?: number;
+};
+
+type FrameProps = {
+  alpha?: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  videoKey: string;
+  position: "first" | "last";
 };
 
 interface FrameThemeElement extends IThemeElement<FrameProps> {
