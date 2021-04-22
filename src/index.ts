@@ -19,7 +19,11 @@ interface Animation<
   to: TProps[TField];
 }
 
-interface IThemeElement<TProps extends Record<string, any>> {
+interface IThemeElement<
+  Type extends string,
+  TProps extends Record<string, any>
+> {
+  type: Type;
   name: string;
   startAt: number;
   endAt: number;
@@ -36,9 +40,7 @@ type RectangleProps = {
   height?: number;
 };
 
-interface RectangleThemeElement extends IThemeElement<RectangleProps> {
-  type: "rect";
-}
+interface RectangleThemeElement extends IThemeElement<"rect", RectangleProps> {}
 
 type GradientProps = {
   alpha?: number;
@@ -48,9 +50,8 @@ type GradientProps = {
   height?: number;
 };
 
-interface GradientThemeElement extends IThemeElement<GradientProps> {
-  type: "gradient";
-}
+interface GradientThemeElement
+  extends IThemeElement<"gradient", GradientProps> {}
 
 type VideoProps = {
   alpha?: number;
@@ -60,15 +61,12 @@ type VideoProps = {
   height?: number;
 };
 
-interface VideoThemeElement extends IThemeElement<VideoProps> {
-  type: "video";
+interface VideoThemeElement extends IThemeElement<"video", VideoProps> {
   videoKey: string;
   source: "clip" | "theme";
 }
 
-interface TextThemeElement extends IThemeElement<TextProps> {
-  type: "text";
-}
+interface TextThemeElement extends IThemeElement<"text", TextProps> {}
 
 type ImageProps = {
   alpha?: number;
@@ -78,8 +76,7 @@ type ImageProps = {
   height?: number;
 };
 
-interface ImageThemeElement extends IThemeElement<ImageProps> {
-  type: "image";
+interface ImageThemeElement extends IThemeElement<"image", ImageProps> {
   imageKey: string;
 }
 
@@ -107,9 +104,7 @@ type FrameProps = {
   position: "first" | "last";
 };
 
-interface FrameThemeElement extends IThemeElement<FrameProps> {
-  type: "frame";
-}
+interface FrameThemeElement extends IThemeElement<"frame", FrameProps> {}
 
 export type ThemeElement =
   | RectangleThemeElement
