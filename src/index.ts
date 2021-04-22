@@ -62,6 +62,8 @@ type VideoProps = {
 
 interface VideoThemeElement extends IThemeElement<VideoProps> {
   type: "video";
+  videoKey: string;
+  source: "clip" | "theme";
 }
 
 type FrameProps = {
@@ -74,6 +76,19 @@ type FrameProps = {
 
 interface TextThemeElement extends IThemeElement<TextProps> {
   type: "text";
+}
+
+type ImageProps = {
+  alpha?: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+};
+
+interface ImageThemeElement extends IThemeElement<ImageProps> {
+  type: "image";
+  imageKey: string;
 }
 
 type TextProps = {
@@ -99,7 +114,8 @@ export type ThemeElement =
   | GradientThemeElement
   | VideoThemeElement
   | FrameThemeElement
-  | TextThemeElement;
+  | TextThemeElement
+  | ImageThemeElement;
 
 type AnswerData = {
   id: string;
