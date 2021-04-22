@@ -74,11 +74,10 @@ type ImageProps = {
   y?: number;
   width?: number;
   height?: number;
+  imageKey: string;
 };
 
-interface ImageThemeElement extends IThemeElement<"image", ImageProps> {
-  imageKey: string;
-}
+interface ImageThemeElement extends IThemeElement<"image", ImageProps> {}
 
 type TextProps = {
   value: string;
