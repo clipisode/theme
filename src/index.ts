@@ -83,9 +83,10 @@ interface ImageThemeElement extends IThemeElement<"image", ImageProps> {
 type TextProps = {
   value: string;
   fontSize: number;
-  lineHeight: number;
+  lineHeight?: number;
   fontName: string;
   textAlign: "center" | "left" | "right";
+  originY?: "top" | "bottom";
   color: string;
   alpha?: number;
   x?: number;
