@@ -40,18 +40,66 @@ interface RectangleThemeElement extends IThemeElement<RectangleProps> {
   type: "rect";
 }
 
-interface GradientThemeElement
-  extends IThemeElement<{
-    alpha?: number;
-    x?: number;
-    y?: number;
-    width?: number;
-    height?: number;
-  }> {
+type GradientProps = {
+  alpha?: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+};
+
+interface GradientThemeElement extends IThemeElement<GradientProps> {
   type: "gradient";
 }
 
-export type ThemeElement = RectangleThemeElement | GradientThemeElement;
+type VideoProps = {
+  alpha?: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+};
+
+interface VideoThemeElement extends IThemeElement<VideoProps> {
+  type: "video";
+}
+
+type FrameProps = {
+  alpha?: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+};
+
+interface TextThemeElement extends IThemeElement<TextProps> {
+  type: "text";
+}
+
+type TextProps = {
+  value: string;
+  fontSize: number;
+  lineHeight: number;
+  fontName: string;
+  textAlign: "center" | "left" | "right";
+  color: string;
+  alpha?: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+};
+
+interface FrameThemeElement extends IThemeElement<FrameProps> {
+  type: "frame";
+}
+
+export type ThemeElement =
+  | RectangleThemeElement
+  | GradientThemeElement
+  | VideoThemeElement
+  | FrameThemeElement
+  | TextThemeElement;
 
 type AnswerData = {
   id: string;
