@@ -71,7 +71,9 @@ interface VideoThemeElement extends IThemeElement<"video", VideoProps> {
   source: VideoSource;
 }
 
-interface TextThemeElement extends IThemeElement<"text", TextProps> {}
+interface TextThemeElement extends IThemeElement<"text", TextProps> {
+  fontKey?: string;
+}
 
 type ImageProps = {
   alpha?: number;
