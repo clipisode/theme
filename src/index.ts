@@ -8,6 +8,39 @@ export type InvitationPreviewGeneratorFn = (opts: object) => void;
 export type CustomDataDescriptor = { key: string };
 export type GetCustomDataDescriptorsFn = () => CustomDataDescriptor[];
 
+type ImageData = {
+  path?: string;
+  height?: number;
+  width?: number;
+  link?: string;
+};
+
+export type SiteData = {
+  customCssKey?: string;
+  meta?: {
+    title?: string;
+    description?: string;
+  };
+  icon?: ImageData;
+  logo?: ImageData;
+  introScreen?: {
+    recordButtonLabel?: string;
+  };
+  nameScreen?: {
+    nameLabel?: string;
+    titleUploading?: string;
+    titleHitSave?: string;
+    instructions?: string;
+    editButtonLabel?: string;
+    saveButtonLabel?: string;
+  };
+  successScreen?: {
+    markup?: `<p class="mt-16 mb-8 mx-3 text-center">Nice work! Your video request for <span class="whitespace-nowrap"><b>INVITATION_DISPLAY_NAME</b> was sent.</span></p><div class="self-center"><a href="https://rushtix.com"><img src="THEME_FILE_ROOT/logo-rushtix.png" width="220" height="39" /></a></div><p class="my-8 mx-3 text-center">You'll receive your shoutout video from <b>INVITATION_DISPLAY_NAME</b> via email when <span class="whitespace-nowrap">it's ready.</span></p>`;
+  };
+};
+
+export type SiteDataGetterFn = () => Promise<SiteData>;
+
 interface Animation<
   TProps extends Record<string, any>,
   TField extends keyof TProps
