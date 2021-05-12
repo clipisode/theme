@@ -23,19 +23,56 @@ export type SiteData = {
   };
   icon?: ImageData;
   logo?: ImageData;
-  introScreen?: {
+  brandColor?: string;
+  networkError?: string;
+  unknownError?: string;
+  introScreen: {
     recordButtonLabel?: string;
+    readyButtonLabel?: string;
+    uploadLinkLabel?: string;
+    readyDescription?: string;
+    termsMarkup?: string;
+    extraTerms?: string;
   };
-  nameScreen?: {
+  nameScreen: {
     nameLabel?: string;
+    nameValidation?: string;
+    socialValidation?: string;
+    socialDescription?: string;
     titleUploading?: string;
     titleHitSave?: string;
     instructions?: string;
+    pleaseWait?: string;
     editButtonLabel?: string;
     saveButtonLabel?: string;
   };
+  emailScreen: {};
+  closedScreen: {
+    markup?: string;
+  };
   successScreen?: {
-    markup?: `<p class="mt-16 mb-8 mx-3 text-center">Nice work! Your video request for <span class="whitespace-nowrap"><b>INVITATION_DISPLAY_NAME</b> was sent.</span></p><div class="self-center"><a href="https://rushtix.com"><img src="THEME_FILE_ROOT/logo-rushtix.png" width="220" height="39" /></a></div><p class="my-8 mx-3 text-center">You'll receive your shoutout video from <b>INVITATION_DISPLAY_NAME</b> via email when <span class="whitespace-nowrap">it's ready.</span></p>`;
+    markup?: string;
+  };
+  warningCamera?: {
+    description?: string;
+    dismissButtonLabel?: string;
+  };
+  warningNetwork?: {
+    title?: string;
+    description?: string;
+    redoButtonLabel?: string;
+  };
+  warningSilent?: {
+    title?: string;
+    description?: string;
+    redoButtonLabel?: string;
+    continueLinkLabel?: string;
+  };
+  warningWide?: {
+    title?: string;
+    description?: string;
+    redoButtonLabel?: string;
+    continueLinkLabel?: string;
   };
 };
 
