@@ -1,3 +1,5 @@
+export { getElements } from "./getElements";
+
 export type VideoComposition = {
   videos: Array<{ type: "clip"; clipId: string }>;
 };
