@@ -28,7 +28,7 @@ export type SiteData = {
   brandColor?: string;
   networkError?: string;
   unknownError?: string;
-  introScreen: {
+  introScreen?: {
     recordButtonLabel?: string;
     readyButtonLabel?: string;
     uploadLinkLabel?: string;
@@ -36,7 +36,10 @@ export type SiteData = {
     termsMarkup?: string;
     extraTerms?: string;
   };
-  nameScreen: {
+  introScreenDesktop?: {
+    markup?: string;
+  };
+  nameScreen?: {
     nameLabel?: string;
     nameValidation?: string;
     socialValidation?: string;
@@ -48,8 +51,8 @@ export type SiteData = {
     editButtonLabel?: string;
     saveButtonLabel?: string;
   };
-  emailScreen: {};
-  closedScreen: {
+  emailScreen?: {};
+  closedScreen?: {
     markup?: string;
   };
   successScreen?: {
