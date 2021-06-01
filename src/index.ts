@@ -12,8 +12,8 @@ export type GetCustomDataDescriptorsFn = () => CustomDataDescriptor[];
 
 type ImageData = {
   path?: string;
-  height?: number;
   width?: number;
+  height?: number;
   link?: string;
 };
 
@@ -50,8 +50,14 @@ export type SiteData = {
     pleaseWait?: string;
     editButtonLabel?: string;
     saveButtonLabel?: string;
+    nameScreenHeader?: string;
   };
-  emailScreen?: {};
+  emailScreen?: {
+    title?: string;
+    emailInputPlaceholder?: string;
+    buttonLabel?: string;
+    buttonSkipLabel?: string;
+  };
   closedScreen?: {
     markup?: string;
   };
