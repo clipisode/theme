@@ -129,6 +129,9 @@ type GradientProps = {
   y?: number;
   width?: number;
   height?: number;
+  rVal?: number;
+  gVal?: number;
+  bVal?: number;
 };
 
 interface GradientThemeElement
