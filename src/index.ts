@@ -29,6 +29,7 @@ export type SiteData = {
   networkError?: string;
   unknownError?: string;
   introScreen?: {
+    playButtonSVG?: string;
     recordButtonLabel?: string;
     readyButtonLabel?: string;
     uploadLinkLabel?: string;
