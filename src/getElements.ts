@@ -1,6 +1,6 @@
 import { GetElementsFn, OriginY, TextAlign, VideoSource } from ".";
 
-export const getElements: GetElementsFn = (answer) => {
+export const getElements: GetElementsFn = (video) => {
   const WIDTH = 720;
   const HEIGHT = 1280;
   const SPACING = 25;
@@ -37,6 +37,9 @@ export const getElements: GetElementsFn = (answer) => {
     color: "#FFFFFF",
   };
 
+  const replyClip = video.clips[0];
+  const answerClip = video.clips[1];
+
   return [
     {
       type: "frame",
@@ -44,7 +47,7 @@ export const getElements: GetElementsFn = (answer) => {
       startAt: 0,
       endAt: TITLEDURATION,
       props: {
-        videoKey: answer.reply.clip.id,
+        videoKey: replyClip.id,
         position: "first",
         x: 0,
         y: 0,
@@ -55,10 +58,10 @@ export const getElements: GetElementsFn = (answer) => {
     {
       type: "frame",
       name: "frame.reply.last",
-      startAt: 2 + answer.reply.clip.duration - 0.5,
-      endAt: 2 + answer.reply.clip.duration,
+      startAt: 2 + replyClip.duration - 0.5,
+      endAt: 2 + replyClip.duration,
       props: {
-        videoKey: answer.reply.clip.id,
+        videoKey: replyClip.id,
         position: "last",
         x: 0,
         y: 0,
@@ -69,10 +72,10 @@ export const getElements: GetElementsFn = (answer) => {
     {
       type: "video",
       name: "video.reply",
-      videoKey: answer.reply.clip.id,
+      videoKey: replyClip.id,
       source: VideoSource.Clip,
       startAt: 2,
-      endAt: 2 + answer.reply.clip.duration,
+      endAt: 2 + replyClip.duration,
       props: {
         x: 0,
         y: 0,
@@ -83,15 +86,14 @@ export const getElements: GetElementsFn = (answer) => {
     {
       type: "frame",
       name: "frame.answer.last",
-      startAt:
-        TITLEDURATION + answer.reply.clip.duration + answer.clip.duration - 0.5,
+      startAt: TITLEDURATION + replyClip.duration + answerClip.duration - 0.5,
       endAt:
         TITLEDURATION +
-        answer.reply.clip.duration +
-        answer.clip.duration +
+        replyClip.duration +
+        answerClip.duration +
         ENDINGDURATION,
       props: {
-        videoKey: answer.clip.id,
+        videoKey: answerClip.id,
         position: "last",
         x: 0,
         y: 0,
@@ -102,10 +104,10 @@ export const getElements: GetElementsFn = (answer) => {
     {
       type: "video",
       name: "video.answer",
-      videoKey: answer.clip.id,
+      videoKey: answerClip.id,
       source: VideoSource.Clip,
-      startAt: TITLEDURATION + answer.reply.clip.duration,
-      endAt: TITLEDURATION + answer.reply.clip.duration + answer.clip.duration,
+      startAt: TITLEDURATION + replyClip.duration,
+      endAt: TITLEDURATION + replyClip.duration + answerClip.duration,
       props: {
         x: 0,
         y: 0,
@@ -173,7 +175,7 @@ export const getElements: GetElementsFn = (answer) => {
       startAt: 0,
       endAt: TITLEDURATION - 0.1,
       props: {
-        value: answer.ask.title, // " 🔥🔥🔥 mighty mighty bosstones carl weathers scarlett johansson arnold schwarzenegger"
+        value: video.topic?.title ?? video.title, // " 🔥🔥🔥 mighty mighty bosstones carl weathers scarlett johansson arnold schwarzenegger"
         color: "#FFFFFF",
         fontName: "FiraSans-ExtraBold",
         fontSize: 80,
@@ -201,7 +203,7 @@ export const getElements: GetElementsFn = (answer) => {
       startAt: 0,
       endAt: TITLEDURATION,
       props: {
-        value: answer.clip.displayName,
+        value: answerClip.displayName,
         color: "#FFFFFF",
         fontName: "OpenSans-Regular",
         fontSize: 36,
@@ -236,7 +238,7 @@ export const getElements: GetElementsFn = (answer) => {
       startAt: 0,
       endAt: TITLEDURATION,
       props: {
-        value: "and " + answer.reply.clip.displayName,
+        value: "and " + replyClip.displayName,
         color: "#FFFFFF",
         fontName: "OpenSans-Regular",
         fontSize: 36,
@@ -270,13 +272,13 @@ export const getElements: GetElementsFn = (answer) => {
       type: "gradient",
       name: "question.fade",
       startAt: TITLEDURATION,
-      endAt: TITLEDURATION + answer.reply.clip.duration,
+      endAt: TITLEDURATION + replyClip.duration,
       props: {
         alpha: 1,
         ...bottomFadeRect,
       },
       animations:
-        answer.reply.clip.duration < YOYOMIN
+        replyClip.duration < YOYOMIN
           ? [
               {
                 startAt: TITLEDURATION,
@@ -307,14 +309,14 @@ export const getElements: GetElementsFn = (answer) => {
       type: "text",
       name: "question.name",
       startAt: TITLEDURATION,
-      endAt: TITLEDURATION + answer.reply.clip.duration,
+      endAt: TITLEDURATION + replyClip.duration,
       props: {
         alpha: 1,
-        value: answer.reply.clip.displayName,
+        value: replyClip.displayName,
         ...displayNameTextProps,
       },
       animations:
-        answer.reply.clip.duration < YOYOMIN
+        replyClip.duration < YOYOMIN
           ? [
               {
                 startAt: TITLEDURATION,
@@ -324,8 +326,8 @@ export const getElements: GetElementsFn = (answer) => {
                 to: 1,
               },
               {
-                startAt: TITLEDURATION + answer.reply.clip.duration - 0.2,
-                endAt: TITLEDURATION + answer.reply.clip.duration,
+                startAt: TITLEDURATION + replyClip.duration - 0.2,
+                endAt: TITLEDURATION + replyClip.duration,
                 field: "alpha",
                 from: 1,
                 to: 0,
@@ -347,15 +349,15 @@ export const getElements: GetElementsFn = (answer) => {
                 to: 1,
               },
               {
-                startAt: TITLEDURATION + answer.reply.clip.duration - 1.4,
-                endAt: TITLEDURATION + answer.reply.clip.duration - 0.2,
+                startAt: TITLEDURATION + replyClip.duration - 1.4,
+                endAt: TITLEDURATION + replyClip.duration - 0.2,
                 field: "alpha",
                 from: 1,
                 to: 0,
               },
               {
-                startAt: TITLEDURATION + answer.reply.clip.duration - 0.2,
-                endAt: TITLEDURATION + answer.reply.clip.duration,
+                startAt: TITLEDURATION + replyClip.duration - 0.2,
+                endAt: TITLEDURATION + replyClip.duration,
                 field: "alpha",
                 from: 0,
                 to: 0,
@@ -365,25 +367,22 @@ export const getElements: GetElementsFn = (answer) => {
     {
       type: "gradient",
       name: "answer.fade",
-      startAt: TITLEDURATION + answer.reply.clip.duration,
-      endAt: TITLEDURATION + answer.reply.clip.duration + answer.clip.duration,
+      startAt: TITLEDURATION + replyClip.duration,
+      endAt: TITLEDURATION + replyClip.duration + answerClip.duration,
       props: {
         alpha: 1,
         ...bottomFadeRect,
       },
       animations:
-        answer.clip.duration < YOYOMIN
+        answerClip.duration < YOYOMIN
           ? [
               {
                 startAt:
                   TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration -
+                  replyClip.duration +
+                  answerClip.duration -
                   0.4,
-                endAt:
-                  TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration,
+                endAt: TITLEDURATION + replyClip.duration + answerClip.duration,
                 field: "alpha",
                 from: 1,
                 to: 0,
@@ -393,13 +392,13 @@ export const getElements: GetElementsFn = (answer) => {
               {
                 startAt:
                   TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration -
+                  replyClip.duration +
+                  answerClip.duration -
                   1.6,
                 endAt:
                   TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration -
+                  replyClip.duration +
+                  answerClip.duration -
                   0.8,
                 field: "alpha",
                 from: 1,
@@ -408,13 +407,10 @@ export const getElements: GetElementsFn = (answer) => {
               {
                 startAt:
                   TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration -
+                  replyClip.duration +
+                  answerClip.duration -
                   0.8,
-                endAt:
-                  TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration,
+                endAt: TITLEDURATION + replyClip.duration + answerClip.duration,
                 field: "alpha",
                 from: 0,
                 to: 0,
@@ -424,19 +420,19 @@ export const getElements: GetElementsFn = (answer) => {
     {
       type: "text",
       name: "answer.name",
-      startAt: TITLEDURATION + answer.reply.clip.duration,
-      endAt: TITLEDURATION + answer.reply.clip.duration + answer.clip.duration,
+      startAt: TITLEDURATION + replyClip.duration,
+      endAt: TITLEDURATION + replyClip.duration + answerClip.duration,
       props: {
         alpha: 1,
-        value: answer.clip.displayName,
+        value: answerClip.displayName,
         ...displayNameTextProps,
       },
       animations:
-        answer.clip.duration < YOYOMIN
+        answerClip.duration < YOYOMIN
           ? [
               {
-                startAt: TITLEDURATION + answer.reply.clip.duration,
-                endAt: TITLEDURATION + answer.reply.clip.duration + 0.2,
+                startAt: TITLEDURATION + replyClip.duration,
+                endAt: TITLEDURATION + replyClip.duration + 0.2,
                 field: "alpha",
                 from: 0,
                 to: 1,
@@ -444,13 +440,10 @@ export const getElements: GetElementsFn = (answer) => {
               {
                 startAt:
                   TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration -
+                  replyClip.duration +
+                  answerClip.duration -
                   0.2,
-                endAt:
-                  TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration,
+                endAt: TITLEDURATION + replyClip.duration + answerClip.duration,
                 field: "alpha",
                 from: 1,
                 to: 0,
@@ -458,15 +451,15 @@ export const getElements: GetElementsFn = (answer) => {
             ]
           : [
               {
-                startAt: TITLEDURATION + answer.reply.clip.duration,
-                endAt: TITLEDURATION + answer.reply.clip.duration + 0.2,
+                startAt: TITLEDURATION + replyClip.duration,
+                endAt: TITLEDURATION + replyClip.duration + 0.2,
                 field: "alpha",
                 from: 0,
                 to: 0,
               },
               {
-                startAt: TITLEDURATION + answer.reply.clip.duration + 0.2,
-                endAt: TITLEDURATION + answer.reply.clip.duration + 1.4,
+                startAt: TITLEDURATION + replyClip.duration + 0.2,
+                endAt: TITLEDURATION + replyClip.duration + 1.4,
                 field: "alpha",
                 from: 0,
                 to: 1,
@@ -474,13 +467,13 @@ export const getElements: GetElementsFn = (answer) => {
               {
                 startAt:
                   TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration -
+                  replyClip.duration +
+                  answerClip.duration -
                   1.4,
                 endAt:
                   TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration -
+                  replyClip.duration +
+                  answerClip.duration -
                   0.2,
                 field: "alpha",
                 from: 1,
@@ -489,13 +482,10 @@ export const getElements: GetElementsFn = (answer) => {
               {
                 startAt:
                   TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration -
+                  replyClip.duration +
+                  answerClip.duration -
                   0.2,
-                endAt:
-                  TITLEDURATION +
-                  answer.reply.clip.duration +
-                  answer.clip.duration,
+                endAt: TITLEDURATION + replyClip.duration + answerClip.duration,
                 field: "alpha",
                 from: 0,
                 to: 0,
@@ -505,15 +495,11 @@ export const getElements: GetElementsFn = (answer) => {
     {
       type: "rect",
       name: "ending.shade",
-      startAt:
-        TITLEDURATION +
-        answer.reply.clip.duration +
-        answer.clip.duration -
-        0.25,
+      startAt: TITLEDURATION + replyClip.duration + answerClip.duration - 0.25,
       endAt:
         TITLEDURATION +
-        answer.reply.clip.duration +
-        answer.clip.duration +
+        replyClip.duration +
+        answerClip.duration +
         ENDINGDURATION,
       props: {
         color: "#000000",
@@ -526,15 +512,9 @@ export const getElements: GetElementsFn = (answer) => {
       animations: [
         {
           startAt:
-            TITLEDURATION +
-            answer.reply.clip.duration +
-            answer.clip.duration -
-            0.25,
+            TITLEDURATION + replyClip.duration + answerClip.duration - 0.25,
           endAt:
-            TITLEDURATION +
-            answer.reply.clip.duration +
-            answer.clip.duration +
-            0.25,
+            TITLEDURATION + replyClip.duration + answerClip.duration + 0.25,
           field: "alpha",
           from: 0,
           to: 0.8,
@@ -544,16 +524,15 @@ export const getElements: GetElementsFn = (answer) => {
     {
       type: "text",
       name: "ending.name",
-      startAt:
-        TITLEDURATION + answer.reply.clip.duration + answer.clip.duration + 0.4,
+      startAt: TITLEDURATION + replyClip.duration + answerClip.duration + 0.4,
       endAt:
         TITLEDURATION +
-        answer.reply.clip.duration +
-        answer.clip.duration +
+        replyClip.duration +
+        answerClip.duration +
         ENDINGDURATION,
       props: {
         alpha: 1,
-        value: answer.clip.displayName,
+        value: answerClip.displayName,
         fontSize: 54,
         lineHeight: 54,
         y: 480,
@@ -563,15 +542,8 @@ export const getElements: GetElementsFn = (answer) => {
       animations: [
         {
           startAt:
-            TITLEDURATION +
-            answer.reply.clip.duration +
-            answer.clip.duration +
-            0.4,
-          endAt:
-            TITLEDURATION +
-            answer.reply.clip.duration +
-            answer.clip.duration +
-            1.0,
+            TITLEDURATION + replyClip.duration + answerClip.duration + 0.4,
+          endAt: TITLEDURATION + replyClip.duration + answerClip.duration + 1.0,
           field: "alpha",
           from: 0,
           to: 1,
@@ -581,16 +553,15 @@ export const getElements: GetElementsFn = (answer) => {
     {
       type: "text",
       name: "ending.promo",
-      startAt:
-        TITLEDURATION + answer.reply.clip.duration + answer.clip.duration,
+      startAt: TITLEDURATION + replyClip.duration + answerClip.duration,
       endAt:
         TITLEDURATION +
-        answer.reply.clip.duration +
-        answer.clip.duration +
+        replyClip.duration +
+        answerClip.duration +
         ENDINGDURATION,
       props: {
         alpha: 1,
-        value: answer.ask.host?.promoText ?? "clipisode.com",
+        value: video.topic?.host?.promoText ?? "clipisode.com",
         fontSize: 32,
         lineHeight: 45,
         y: 570,
@@ -600,30 +571,16 @@ export const getElements: GetElementsFn = (answer) => {
       animations: [
         {
           startAt:
-            TITLEDURATION +
-            answer.reply.clip.duration +
-            answer.clip.duration +
-            0.0,
-          endAt:
-            TITLEDURATION +
-            answer.reply.clip.duration +
-            answer.clip.duration +
-            0.8,
+            TITLEDURATION + replyClip.duration + answerClip.duration + 0.0,
+          endAt: TITLEDURATION + replyClip.duration + answerClip.duration + 0.8,
           field: "alpha",
           from: 0,
           to: 0,
         },
         {
           startAt:
-            TITLEDURATION +
-            answer.reply.clip.duration +
-            answer.clip.duration +
-            0.8,
-          endAt:
-            TITLEDURATION +
-            answer.reply.clip.duration +
-            answer.clip.duration +
-            1.6,
+            TITLEDURATION + replyClip.duration + answerClip.duration + 0.8,
+          endAt: TITLEDURATION + replyClip.duration + answerClip.duration + 1.6,
           field: "alpha",
           from: 0,
           to: 1,

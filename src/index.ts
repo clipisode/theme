@@ -217,9 +217,10 @@ export type ThemeElement =
   | TextThemeElement
   | ImageThemeElement;
 
-type AnswerData = {
+type VideoData = {
   id: string;
-  ask: {
+  title: string;
+  topic?: {
     id: string;
     title: string;
     host: {
@@ -227,19 +228,11 @@ type AnswerData = {
       promoText: string | null;
     } | null;
   };
-  clip: {
+  clips: Array<{
     id: string;
     duration: number;
     displayName: string;
-  };
-  reply: {
-    id: string;
-    clip: {
-      id: string;
-      duration: number;
-      displayName: string;
-    };
-  };
+  }>;
 };
 
-export type GetElementsFn = (answer: AnswerData) => Array<ThemeElement>;
+export type GetElementsFn = (video: VideoData) => Array<ThemeElement>;
