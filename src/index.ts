@@ -17,6 +17,14 @@ type ImageData = {
   link?: string;
 };
 
+export enum SocialPrompt {
+  Auto = "auto",
+  None = "none",
+  Instagram = "instagram",
+  Twitter = "twitter",
+  Facebook = "facebook"
+}
+
 export type SiteData = {
   customCssKey?: string;
   customJsKey?: string;
@@ -46,6 +54,8 @@ export type SiteData = {
     nameValidation?: string;
     socialValidation?: string;
     socialDescription?: string;
+    socialPrompt?: SocialPrompt,
+    socialPromptFallback?: SocialPrompt;,
     titleUploading?: string;
     titleHitSave?: string;
     instructions?: string;
