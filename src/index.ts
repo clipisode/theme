@@ -217,22 +217,26 @@ export type ThemeElement =
   | TextThemeElement
   | ImageThemeElement;
 
-type VideoData = {
+export type ClipData = {
   id: string;
-  title: string;
-  topic?: {
-    id: string;
-    title: string;
-    host: {
-      id: string;
-      promoText: string | null;
-    } | null;
-  };
-  clips: Array<{
-    id: string;
-    duration: number;
-    displayName: string;
-  }>;
+  duration: number;
+  displayName: string;
 };
 
-export type GetElementsFn = (video: VideoData) => Array<ThemeElement>;
+export type TopicData = {
+  id: string;
+  title: string;
+  host: {
+    id: string;
+    promoText: string | null;
+  } | null;
+};
+
+export type VideoData = {
+  id: string;
+  title: string;
+  topic?: TopicData;
+  clips: ClipData[];
+};
+
+export type GetElementsFn = (video: VideoData) => ThemeElement[];
