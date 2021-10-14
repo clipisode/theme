@@ -19,6 +19,7 @@ type ImageData = {
 
 export type SiteData = {
   customCssKey?: string;
+  customJsKey?: string;
   meta?: {
     title?: string;
     description?: string;
