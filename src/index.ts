@@ -22,7 +22,7 @@ export enum SocialPrompt {
   None = "none",
   Instagram = "instagram",
   Twitter = "twitter",
-  Facebook = "facebook"
+  Facebook = "facebook",
 }
 
 export type SiteData = {
@@ -54,8 +54,8 @@ export type SiteData = {
     nameValidation?: string;
     socialValidation?: string;
     socialDescription?: string;
-    socialPrompt?: SocialPrompt,
-    socialPromptFallback?: SocialPrompt;,
+    socialPrompt?: SocialPrompt;
+    socialPromptFallback?: SocialPrompt;
     titleUploading?: string;
     titleHitSave?: string;
     instructions?: string;
