@@ -1,7 +1,7 @@
 {
   "name": "@clipisode/theme",
   "main": "lib/index.js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "Max Schmeling",
     "email": "max@clipisode.com"
